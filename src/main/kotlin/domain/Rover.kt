@@ -1,4 +1,5 @@
 package domain
 
-class Rover(val position: Position, orientation: Orientation, val id: Int) {
+class Rover(val id: Int, var position: Position, val orientation: Orientation) {
+
 }

@@ -3,26 +3,28 @@ package action
 import org.junit.Assert
 import org.junit.Test
 import RoversInMemory
+import domain.Plateau
+import infrastructure.RoverBuilder.Companion.aRover
 
 class SendCommandToRoverTest {
-    private val SOME_ROVER_ID = 1
+
     @Test
     fun `move it forward one position when an F command is sent`() {
+        val rover = aRover().id(SOME_ROVER_ID).build()
         val rovers = RoversInMemory()
+        rovers.add(rover)
+        val plateau = Plateau(SOME_SIZE)
+        val result = SendCommandToRover(rovers, plateau).execute(SOME_ROVER_ID, "F")
 
-        val result = SendCommandToRover(rovers).execute(SOME_ROVER_ID, "F")
-
-        Assert.assertEquals("10NOK", result)
+        Assert.assertEquals("01NOK", result)
     }
-/*
+
+
     @Test
     fun `stop moving when obstacle found`() {
-        val obstacles = mutableListOf(Position(0, 1))
-        val plateau = Plateau(2, 2, obstacles)
-        val rover = Rover(Position(0, 0), Orientation.NORTH, SOME_ROVER_ID)
 
+    }
 
-        val result = SendCommandToRover().execute(SOME_ROVER_ID, "F")
-        Assert.assertEquals("00NNOK", result)
-    } */
+    private val SOME_SIZE = 2
+    private val SOME_ROVER_ID = 1
 }

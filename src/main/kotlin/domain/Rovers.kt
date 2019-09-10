@@ -1,3 +1,6 @@
 package domain
 
-interface Rovers {}
+interface Rovers {
+    fun add(rover: Rover)
+    fun getById(id: Int): Rover
+}

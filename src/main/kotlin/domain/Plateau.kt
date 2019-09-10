@@ -1,6 +1,6 @@
 package domain
 
-class Plateau(val rows: Int, val columns: Int, val obstacles: MutableList<Position> = mutableListOf()) {
+class Plateau(val size: Int, val obstacles: MutableList<Position> = mutableListOf()) {
     fun getNextPosition(position: Position, orientation: Orientation): Position {
         return when (orientation) {
             Orientation.NORTH -> getNorthernPosition(position)
@@ -32,12 +32,12 @@ class Plateau(val rows: Int, val columns: Int, val obstacles: MutableList<Positi
 
     private fun isFirstColumn(position: Position) = position.x == firstColumnIndex()
     private fun isLastColumn(position: Position) = position.x == lastColumnIndex()
-    private fun lastColumnIndex() = columns - 1
+    private fun lastColumnIndex() = size - 1
     private fun firstColumnIndex() = 0
 
     private fun isFirstRow(position: Position) = position.y == firstRowIndex()
     private fun isLastRow(position: Position) = position.y == lastRowIndex()
-    private fun lastRowIndex() = rows - 1
+    private fun lastRowIndex() = size - 1
     private fun firstRowIndex() = 0
 
     fun existObstacleAt(pos: Position): Boolean {
@@ -46,5 +46,9 @@ class Plateau(val rows: Int, val columns: Int, val obstacles: MutableList<Positi
 
     fun registerObstacleAt(pos: Position) {
         obstacles.add(pos)
+    }
+
+    fun unregisterObstacleAt(pos: Position) {
+        obstacles.remove(pos)
     }
 }
